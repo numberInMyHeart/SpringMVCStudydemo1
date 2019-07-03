@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--handlerMapping的配置-->
+    <bean id="handlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+    <!--handlerAdapter的配置-->
+    <!--该适配器表示所有实现了mvc包下的Controller接口的处理器都可以适配成功-->
+    <bean id="handlerAdapter" class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    <!--视图解析器-->
+    <!--InternalResourceViewResolver表示支持servlet、jsp的解析-->
+    <!--JstlView表示jsp模板页面需要使用jstl标签库-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--处理器配置-->
+    <!--这里由于我们配置的是BeanNameUrlHandlerMapping，所以id必须为映射url地址-->
+    <bean id="/hello" class="com.controller.MyController"/>
+</beans>

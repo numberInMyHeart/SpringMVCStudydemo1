@@ -1,0 +1,34 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!--配置spring的配置文件applicationContext.xml的加载-->
+  <!--包括两个部分：listener和context-param-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!--配置前端控制器-->
+  <servlet>
+    <servlet-name>diapatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!--这里是配置让前端控制器寻找dispatcher配置文件的路径，否则会默认到WEB-INF下去查找-->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:dispatcherServlet-servlet.xml</param-value>
+    </init-param>
+    <!--该配置内容表示TOMCAT启动时即加载，并且只能配置在最后一行-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>diapatcherServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>
